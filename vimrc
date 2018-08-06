@@ -15,6 +15,10 @@ Plug 'rking/ag.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 " 补全插件
 Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
+Plug 'vim-scripts/javacomplete'
+Plug 'vim-scripts/JavaBrowser'
+Plug 'vim-scripts/taglist.vim'
+
 " 装13用的
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -43,6 +47,8 @@ Plug 'xolox/vim-misc'
 
 " Python的自动缩进，支持PEP8
 Plug 'vim-scripts/indentpython.vim'
+
+Plug 'jlanzarotta/bufexplorer'
 
 
 call plug#end()
@@ -125,38 +131,23 @@ map <C-r> :call CompileRunGcc()<CR>
 func! CompileRunGcc()
     exec "w"
     if &filetype == 'c'
-        exec "!g++ % -o %<"
-        exec "!time ./%<"
-        exec "!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q *.c"
+        exec "!ctags -R --languages=c,c++ --c-kinds=+cdefglmnpstuvx --fields=+aiKSz --extra=+q"
     elseif &filetype == 'cpp'
-        exec "!g++ % -o %<"
-        exec "!time ./%<"
-        exec "!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q *.cpp"
+        exec "!ctags -R --languages=c,c++ --c++-kinds=+cdefglmnpstuvx --fields=+aiKSz --extra=+q"
     elseif &filetype == 'java'
-        exec "!javac %"
-        exec "!time java %<"
-        exec "!ctags --declarations --language=java *.java"
+        exec "!ctags -R --languages=java --java-kinds=+cefgilmp --fields=+aiKSz --extra=+q"
     elseif &filetype == 'sh'
-        exec "!time bash %"
         exec "!ctags -R *"
     elseif &filetype == 'scala'
-        exec "!time scala %"
-        exec "!ctags -R * --exclude=target --exclude=vendor"
+        exec "!ctags -R *"
     elseif &filetype == 'lua'
-        exec "!time lua %"
-        exec "!ctags -R *"
+        exec "!ctags -R --lua-kinds=+f --fields=+aiKSz --extra=+q"
     elseif &filetype == 'python'
-        exec "!time python2.7 %"
-        exec "!ctags -R *"
+        exec "!ctags -R --languages=python --python-kinds=+cfmvi --fields=+aiKSz --extra=+q"
     elseif &filetype == 'html'
-        exec "!open % &"
+        exec "!ctags -R --languages=html --html-kinds=+af --fields=+aiKSz --extra=+q"
     elseif &filetype == 'go'
-        exec "!go build %<"
-        exec "!time go run %"
         exec "!ctags -R *"
-    elseif &filetype == 'mkd'
-        exec "!~/.vim/markdown.pl % > %.html &"
-        exec "!open %.html &"
     endif
 endfunc
 
@@ -180,6 +171,12 @@ set fileformat=unix
 set encoding=utf-8
 let python_highlight_all=1
 
+" ==========bufexplorer=========
+let g:bufExplorerDefaultHelp=0       " Do not show default help.
+let g:bufExplorerShowNoName=0        " Do not 'No Name' buffers.
+let g:bufExplorerShowRelativePath=1  " Show relative paths.
+let g:bufExplorerSplitRight=0        " Split left.
+let g:bufExplorerSplitVertical=1     " Split Vertical.
 
 " ==========按键映射==========
 nnoremap <Leader>w :w<CR>
@@ -212,3 +209,6 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+" ====模板
+autocmd BufNewFile *.py 0r ~/.vim/template/python
