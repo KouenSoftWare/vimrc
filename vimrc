@@ -179,6 +179,7 @@ let g:bufExplorerSplitRight=0        " Split left.
 let g:bufExplorerSplitVertical=1     " Split Vertical.
 
 " ==========按键映射==========
+map <Leader> <Plug>(easymotion-prefix)
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>x :x<CR>
