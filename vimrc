@@ -14,7 +14,7 @@ Plug 'rking/ag.vim'
 " 快速打开文件的插件，使用C+P
 Plug 'ctrlpvim/ctrlp.vim'
 " 补全插件
-Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
+Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --go-completer'}
 Plug 'vim-scripts/javacomplete'
 Plug 'vim-scripts/JavaBrowser'
 Plug 'vim-scripts/taglist.vim'
@@ -55,6 +55,13 @@ call plug#end()
 
 
 " ==========插件配置==========
+let g:go_version_warning = 1
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
 
 " Ag插件
 let g:ag_prg="ag --vimgrep"
@@ -78,6 +85,8 @@ let g:ycm_complete_in_strings = 1
 let g:ycm_complete_in_comments = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 0
 let g:ycm_confirm_extra_conf=0
+let g:ycm_error_symbol = '>>'
+let g:ycm_warning_symbol = '>*'
 
 " airline
 let g:airline#extensions#tabline#enabled = 1
