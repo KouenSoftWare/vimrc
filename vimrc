@@ -121,7 +121,7 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ }
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " TagbarToggle
 let g:tagbar_ctags_bin='/usr/local/bin/ctags'
